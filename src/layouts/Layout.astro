@@ -1,6 +1,8 @@
 ---
+import Header from "../components/Header.astro";
+
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,43 +10,79 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div id="content">
+      <Header />
+      <slot />
+    </div>
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  /* @font-face {
+    font-family: "Reactor7";
+    src: url("/fonts/Reactor7/Reactor7.ttf");
+  }
+
+  @font-face {
+    font-family: "Fritz-Quadrata-Regular";
+    src: url("/fonts/Bauhaus_93/Bauhaus 93 Regular.ttf");
+  } */
+
+  @font-face {
+    font-family: "Bauhaus-93";
+    src: url("/fonts/Bauhaus_93/Bauhaus 93 Regular.ttf");
+  }
+
+  /* variabless */
+  :root {
+    --default-background-color: #000;
+    --default-font-color: #ddd;
+  }
+
+  html,
+  body {
+    background-color: var(--default-background-color);
+    color: var(--default-font-color);
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    color: var(--default-font-color);
+    text-decoration: none;
+  }
+
+  a:hover {
+    border-style: solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+  }
+
+  p a {
+    background: linear-gradient(to left, #743ad5, #d53a9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: none;
+  }
+
+  #content {
+    margin: auto;
+    max-width: 600px;
+    width: 60%;
+  }
 </style>
