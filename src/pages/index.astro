@@ -4,12 +4,28 @@ import Layout from "../layouts/Layout.astro";
 let projects: any[] = Object.values(
   await import.meta.glob("./projects/*", { eager: true })
 );
+console.log(projects[0].frontmatter.date);
+projects = projects.sort((a, b) => {
+  const dateA = a.frontmatter.date.toUpperCase(); // ignore upper and lowercase
+  const dateB = b.frontmatter.date.toUpperCase(); // ignore upper and lowercase
+  if (dateA < dateB) {
+    return 1;
+  }
+  if (dateA > dateB) {
+    return -1;
+  }
+
+  // names must be equal
+  return 0;
+});
 projects = projects.map((project) => {
   return {
     text: project.frontmatter.title,
     url: project.frontmatter.page,
   };
 });
+
+// items.sort((a, b) => a.value - b.value);
 ---
 
 <Layout title="tengille | index">
@@ -29,7 +45,7 @@ projects = projects.map((project) => {
     margin: auto;
   }
 
-	.item {
-		margin-top: 5px;
-	}
+  .item {
+    margin-top: 5px;
+  }
 </style>
